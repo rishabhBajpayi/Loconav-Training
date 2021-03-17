@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>
+      Exercise 1
+    </title>
+    <style>
+      body {
+        background-color: #3ca2e0;
+        display: flex;
+        padding-top: 130px;
+        justify-content: center;
+        text-align: center;
+      }
+      #outer-div {
+        background-color: #FFFFFF;
+        padding-top: 80px;
+        border-radius: 10px;
+        height: 450px;
+        width: 550px;
+      }
+      .field {
+        border-style: hidden;
+        border-bottom-style: solid ;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        width: 39%;
+        color: #808080;
+        font-size: 16px;
+      }
+      button {
+        background-color: #ff3364;
+        color: #FFFFFF;
+        border-radius: 50px;
+        width: 47%;
+        border-width: 0px;
+        padding: 8px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="outer-div">
+      <img id = "logo" src="images/ex1_brand_icon.png" alt="logo img">
+      <div id="internal-div">
+        <p>
+          <img src="images/ex1_username_icon.png" alt="username icon">
+          <input name="Username" class="field" placeholder="Username">
+        </p>
+        <p>
+          <img src="images/ex1_password_icon.png" alt="password icon">
+          <input type="password" name="Password" class="field" placeholder="Password">
+        </p>
+        <br>
+        <button>
+          Log in
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
