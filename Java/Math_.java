@@ -1,6 +1,6 @@
 class Math_{
-    private float a,b ;
-    Math_(float a,float b){
+    private int a,b ;
+    Math_(int a,int b){
       this.a = a ;
       this.b = b ;
     }
@@ -8,33 +8,32 @@ class Math_{
       System.out.println("a -> "+a);
       System.out.println("b -> "+b);
     }
-    float sum(){
+    int sum(){
       return a+b ;
     }
-    float subtract(){
+    int subtract(){
       return a-b ;
     }
-    float multiply(){
+    int multiply(){
       return a*b ;
     }
-    float divide(){
+    int divide(){
       return a/b ;
     }
     int allFor(){
       int res = 0;
-      for (int i = (int)a+1 ;i < b ;i++ )
+      for (int i = (a<b?a:b)+1 ;i < (a<b?b:a) ;i++ )
         res += i ;
       return res ;
     }
     int allWhile(){
       int res = 0;
-      int i = (int)a+1 ;
-      while (i < b)
+      int i = (a<b?a:b) +1 ;
+      while (i < (a<b?b:a))
         res += i++ ;
       return res ;
     }
-    float conditionalOperation(){
-      float res;
+    int conditionalOperation(){
       if (a<b)
         return a+b;
       else if (a>b && b==0)
