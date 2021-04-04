@@ -1,0 +1,97 @@
+import java.io.FileNotFoundException;  
+import java.io.PrintWriter; 
+public class Main
+{ 
+
+	public static void main(String[] args) {
+	    PrintWriter pw;  
+        try {  
+            pw = new PrintWriter(""); //may throw exception   
+            pw.println("saved");  
+        }  
+    // providing the checked exception handler  
+        catch (FileNotFoundException e) {  
+            System.out.println(e);  
+        }         
+        System.out.println("File saved successfully");  
+    }  
+}
+
+*********************************************************************************************
+
+public class Main
+{ 
+
+	public static void main(String[] args) {
+
+          
+           try{    
+                int a[]=new int[5];    
+                a[5]=30/4;    
+               }    
+               catch(ArithmeticException e)  
+                  {  
+                   System.out.println("Arithmetic Exception occurs");  
+                  }    
+               catch(ArrayIndexOutOfBoundsException e)  
+                  {  
+                   System.out.println("ArrayIndexOutOfBounds Exception occurs");  
+                  }    
+               catch(Exception e)  
+                  {  
+                   System.out.println("Parent Exception occurs");  
+                  }             
+               System.out.println("rest of the code");
+	}
+}
+
+*********************************************************************************************
+
+public class Main
+{ 
+
+	public static void main(String[] args) {
+
+      try{  
+    try{  
+     System.out.println("going to divide");  
+     int b =39/0;  
+    }catch(ArithmeticException e){System.out.println(e);}  
+   
+    int a[]=new int[5]; 
+    try{   
+    a[5]=4;  
+    }catch(ArrayIndexOutOfBoundsException e){
+        a[6]=7;
+        System.out.println(e);
+    }  
+     
+    System.out.println("other statement");  
+  }catch(Exception e){System.out.println("handeled");}  
+  
+  System.out.println("normal flow..");  
+	}
+}
+
+*********************************************************************************************
+
+abstract class Math_ <T> {
+    abstract T sum (T a,T b);
+    void Print(T a ,T b){
+        System.out.println(sum(a,b).toString());
+    }
+}
+
+class testing extends Math_<Integer>{
+    
+    Integer sum(Integer a,Integer b){
+        return a+b;
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+	    testing obj = new testing();
+	    obj.Print(4,5);
+	}
+}
