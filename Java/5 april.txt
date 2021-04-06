@@ -1,0 +1,44 @@
+class Team {
+
+    String city;
+    String department;
+    Team(String c, String d){
+        city = c;
+        department = d;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        // implementation
+        if(o == this)
+            return true;
+        if( !(o instanceof Team) )
+            return false;
+        
+        Team obj = (Team) o ;
+        
+        boolean cityequal = this.city == null && obj.city == null || this.city == obj.city;
+        boolean departmentequal = this.department == null && obj.department == null || this.department == obj.department;
+        
+        return cityequal && departmentequal;
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+	   // Team t1 = new Team(null,null);
+	   // Team t2 = new Team(null,null);
+	   // Team t1 = new Team("delhi",null);
+	   // Team t2 = new Team("delhi",null);
+	   // Team t1 = new Team("delhi","cricket");
+	   // Team t2 = new Team("delhi","cricket"); 
+	    Team t1 = new Team("delhi","football");
+	    Team t2 = new Team("delhi","cricket"); 
+	    if(t1.equals(t2))
+	        System.out.println("Teams are equal");
+	    else
+	        System.out.println("Teams are not equal");
+	    
+	}
+}
