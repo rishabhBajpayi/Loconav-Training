@@ -1,0 +1,59 @@
+private const val constString = "constant string"
+lateinit var staticString : String //?
+
+abstract class Rectangle{
+    abstract var length : Int
+    var breadth : Int = 0
+   
+    fun area() = length * breadth
+}
+abstract class MyAbstractClass {
+//     private const var constString = "constant string"     //error
+    abstract fun doSomething()
+    abstract fun sleep()
+    fun test(){
+        println(constString)
+    }
+    fun sum(a: Int,b:Int) : Int{
+        return a+b ;
+    }
+    fun arrayOfMinusOnes(size: Int): IntArray {
+    return IntArray(size).apply { fill(-1) }
+	}
+}
+
+fun main(args : Array<String>) {
+    
+    val myObject = object : MyAbstractClass() {
+        override fun doSomething() {
+            var funName : String = "do Something function"
+            println(funName)
+        }
+
+        override fun sleep() {
+            println("sleep function")
+        }
+    }
+    
+//     println(myObject.sum(4,10))
+//     myObject.doSomething()
+//     myObject.test()
+//     staticString = "static string using lateinit "// null
+//     println(staticString)
+//     println(constString)
+//     val files = "FilelistVariable"
+//     var f : String ? = "null"
+//     f?.let{
+//         println("not null $it")
+//     }
+//     for(index in 10 downTo 2 step 2){
+//         print("$index ")
+//     }
+//     
+    val rObj = object : Rectangle(){
+        override var length = 4
+    }.apply{
+        breadth = 9
+    }
+	println(rObj.area())
+}
