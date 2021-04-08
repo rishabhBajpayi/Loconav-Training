@@ -1,0 +1,25 @@
+abstract class MyAbstractClass {
+    abstract fun doSomething()
+    abstract fun sleep()
+    fun test(){
+        println("test")
+    }
+}
+
+fun main(args : Array<String>) {
+    val myObject = object : MyAbstractClass() {
+        override fun doSomething() {
+            var funName : String = "do Something"
+            println(funName)
+        }
+
+        override fun sleep() {
+            println("sleep function")
+        }
+    }
+    myObject.doSomething()
+    myObject.test()
+    val files = "FilelistFiles()"
+    var f : String ? = null
+    println(f?.length ?: "empty")
+}
