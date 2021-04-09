@@ -1,0 +1,33 @@
+open class InitOrderDemo(var name: String?) {
+    val firstProperty = "First property: $name".also(::println)
+    
+    init {
+        println("First initializer block that prints ${name}")
+    }
+    
+    val secondProperty = "Second property: ${name?.length}".also(::println)
+    
+    init {
+        println("Second initializer block that prints ${name?.length}")
+    }
+    
+    fun getNam() = name ?: "Not Provided" 
+    
+}
+
+fun main(args:Array<String>){
+//     repeat(10) {i ->
+//         print("index $i ")
+//     }
+//     println()
+//     for(i in 34 /* until 40 */ downTo 2 step(5)){
+//         print("$i ")
+//     }
+//     println()
+    for(i in 34..40 step 2 ){
+        print("$i ")
+    }
+    var initObj = InitOrderDemo("rishabh")
+    var nullInitObj = InitOrderDemo(null)
+    print(initObj.getNam())
+}
