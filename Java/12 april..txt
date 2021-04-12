@@ -1,0 +1,85 @@
+fun <T> printList(listdata : List<T>,country:String? = null){
+    if (country != null) println(country) 
+    listdata.forEachIndexed{index,string->
+        println("$string is at $index index")
+    }
+}
+fun printSet(setdata : Set<String>,country:String? = null){
+    if (country != null) println(country) 
+    setdata.forEachIndexed{index,string->
+        println("$string is at $index index")
+    }
+}
+fun dynArg(vararg values:String){
+    values.forEach{
+        println(it)
+    }
+}
+
+fun factorial(N : Int) : Int{
+    if(N <= 1)
+    	return 1
+    return N*factorial(N-1)
+}
+open class Shape{
+    fun prArea(a : Double = 0.0,shape:String){
+    	println("Area of $shape is $a")
+    }
+}
+
+class Rectangle(var l:Int,var b:Int):Shape() {
+    fun Area(){
+        prArea((l*b)*1.0,shape="Rectangle")
+    }
+}
+class Square(var a:Int=0):Shape() {
+    fun Area(){
+        prArea((a*a)*1.0,shape="Square")
+    }
+}
+class Circle(var r:Int=0):Shape() {
+    fun Area(){
+        prArea(3.14*r*r,shape="Circle")
+    }
+}
+
+fun <T> asList(vararg ts: T): List<T> {
+    val result = ArrayList<T>()
+    for (t in ts) // ts is an Array
+        result.add(t)
+    return result
+}
+// Object.check(o:Any){
+//     if(o == null){
+        
+//     }
+//     else
+//     	return o
+// }
+
+fun main(args:Array<String>){
+    
+    val a = arrayOf(1, 2, 3)
+	val list = asList(-1, 0, *a, 4)
+    
+    printList(listdata = list)
+    
+    var fval = 1.5
+    repeat(10) {i ->
+        println("factorial of ${i+1} is ${factorial(i+1)} ")
+//         print("value of fval is $fval ")
+//         fval++
+    }
+    println()
+    var recObj = Rectangle(3,4)
+    recObj.Area()
+    var sqObj = Square(3)
+    sqObj.Area()
+    var cirObj = Circle(3)
+    cirObj.Area()
+    var states = listOf("delhi","maharastra","gujarat")
+    var sortedstates = states.toSortedSet()
+//     printList(country="india",listdata=states)
+    printSet(sortedstates)
+//     dynArg("delhi","maharastra")
+}
