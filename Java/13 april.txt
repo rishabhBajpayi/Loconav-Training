@@ -1,0 +1,153 @@
+fun <T> printList(listdata : List<T>,country:String? = null){
+    if (country != null) println(country) 
+    listdata.forEachIndexed{index,string->
+        println("$string is at $index index")
+    }
+}
+fun printSet(setdata : Set<String>,country:String? = null){
+    if (country != null) println(country) 
+    setdata.forEachIndexed{index,string->
+        println("$string is at $index index")
+    }
+}
+fun dynArg(vararg values:String){
+    values.forEach{
+        println(it)
+    }
+}
+
+tailrec fun factorial(N : Int) : Int{
+    if(N <= 1)
+    	return 1
+    return N*factorial(N-1)
+}
+open class Shape{
+    fun prArea(a : Double = 0.0,shape:String){
+    	println("Area of $shape is $a")
+    }
+}
+
+class Rectangle(var l:Int,var b:Int):Shape() {
+    fun Area(){
+        prArea((l*b)*1.0,shape="Rectangle")
+    }
+}
+class Square(var a:Int=0):Shape() {
+    fun Area(){
+        prArea((a*a)*1.0,shape="Square")
+    }
+}
+class Circle(var r:Int=0):Shape() {
+    fun Area(){
+        prArea(3.14*r*r,shape="Circle")
+    }
+}
+
+fun <T> asList(vararg ts: T): List<T> {
+    val result = ArrayList<T>()
+    for (t in ts) // ts is an Array
+        result.add(t)
+    return result
+}
+
+class math {
+    // user defined infix member function
+    infix fun square(n : Int): Int{
+        val num = n * n
+        return num
+    }
+    
+    val lambdaSum :(Int,Int) -> Int ={ a,b ->
+        println("This is lambda 1 function  of math to sum ")
+        a+b 
+    }
+    val lambdaSum2 = { a : Int,b : Int -> 
+        println("This is lambda 2 function  of math to sum ")
+        a+b 
+    }
+    val anonymous = fun(a : Int,b : Int ) : Int {
+        println("This is anonymous function  of math to sum ")
+        return a+b 
+    }
+    
+}
+val addString: String.(Int,Int) -> String = {a,b -> this + a + b} 
+
+val find = fun(num:Int):String{
+if(num % 2==0 && num < 0) {
+    return "Number is even and negative"
+   }
+    else if (num %2 ==0 && num >0){
+    return "Number is even and positive"
+    }
+    else if(num %2 !=0 && num < 0){
+    return "Number is odd and negative"
+    }
+    else {
+    return "Number is odd and positive"
+    }
+}
+
+fun addition(a : Int , b : (x:Int,y:Int)->Int ) :Int{
+    var res = b(5,6)
+    println("values got $a $b")
+    return a+res
+}
+
+fun operation(ope:String , a : Int , c :Int,d:Int, b : (x:Int,y:Int)->Int ) :Int{
+    var res = b(a,b(c,d))
+    println("doing $ope of $a $c and $d = ")
+    return res
+}
+
+fun main(args:Array<String>){
+    
+    val add = operation("Adding",2,4,5,{x,y-> x+y })
+    println(add)
+    val mul = operation("Multiplying",2,4,5,{x,y-> x*y })
+    println(mul)
+    val sub = operation("Subtracting",2,4,5,{x,y-> x-y })
+    println(sub)
+    
+    val find = find(112)
+    println(find)
+    val m = math()
+//     val addValue = addition(1,m.lambdaSum(2,6))
+//     var x = 6;
+//     var y = 7;
+    val z :(Int,Int)->Int = {x,y-> x+y }
+//     val addValue = addition(5,z(6,7))
+    val addValue = addition(5,{x,y-> x+y })
+//     val addValue = addition(5,z)
+    println("value from addition is $addValue")
+    val result = m square 3
+    println("The square of a number is : "+result)
+    println("addition of two number is ${m.lambdaSum2(2,3)}")
+    println("addition of two number is ${m.anonymous(2,3)}")
+    val str = "string"
+    println(str.addString(4,6))
+    
+    val a = arrayOf(1, 2, 3)
+	val list = asList(-1, 0, *a, 4)
+    
+    printList(listdata = list)
+    
+    var fval = 1.5
+    repeat(10) {i ->
+        println("factorial of ${i+1} is ${factorial(i+1)} ")
+//         print("value of fval is $fval ")
+//         fval++
+    }
+    println()
+    var recObj = Rectangle(3,4)
+    recObj.Area()
+    var sqObj = Square(3)
+    sqObj.Area()
+    var cirObj = Circle(3)
+    cirObj.Area()
+    var states = listOf("delhi","maharastra","gujarat")
+    var sortedstates = states.toSortedSet()
+//     printList(country="india",listdata=states)
+    printSet(sortedstates)
+//     dynArg("delhi","maharastra")
+}
