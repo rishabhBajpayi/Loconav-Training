@@ -1,0 +1,28 @@
+data class Point(val x: Int, val y: Int){
+    operator fun minus(point : Point):Point {
+        return Point(x-point.x,y-point.y)
+    }
+    operator fun compareTo(other : Point): Int{
+        val k = other.x+other.y
+        if ((x+y)>k)
+            return 1
+        if((x+y)==k)
+            return 0
+        return -1
+    }
+}
+
+
+operator fun Point.unaryMinus() = Point(-x, -y)
+
+val point1 = Point(10, 20)
+val point2 = Point(20,40)
+fun main() {
+    val point3 =  -point1
+    //println(point2.compareTo(point1)>= 0)
+    println(point1>point2)
+    println(point3) // prints "Point(x=-10, y=-20)"
+   	println(point2-point3)  // prints "Point(x=30, y=60)"
+}
+-----------------------------------*************************************------------------------------------
+
