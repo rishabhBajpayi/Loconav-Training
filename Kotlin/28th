@@ -1,0 +1,58 @@
+fun main(){
+    println("main thread running")
+    runBlocking { // this: CoroutineScope
+    println("block main thread")
+        launch { // launch a new coroutine and continue
+        delay(1000L) // non-blocking delay for 1 second (default time unit is ms)
+        println("World!") // print after delay
+    }
+    println("Hello") // main coroutine continues while a previous one is delayed
+}
+println("resume main thread")}
+
+------------------------------**************************--------------------------------
+
+// Sequentially executes doWorld followed by "Hello"
+fun main() {
+    println("main thread")
+    runBlocking { // this: CoroutineScope
+    println("block main thread bu 1 run block")
+        launch { // launch a new coroutine and continue
+        delay(1000L) // non-blocking delay for 1 second (default time unit is ms)
+        println("launch 1 run block 1")
+        } // print after delay
+    	launch { // launch a new coroutine and continue
+        delay(3000L) // non-blocking delay for 1 second (default time unit is ms)
+        println("launch 2 run block 1")
+        } 
+    }
+    runBlocking {    
+    println("main blocked by 2 runBlock")
+    doWorld()
+    println("Done")
+	}
+println("resume mai thread")
+}
+
+// Concurrently executes both sections
+suspend fun doWorld(){
+    println("inside do world")
+    coroutineScope { // this: CoroutineScope
+    println("couroutine scope running")
+    launch {
+        delay(2000L)
+        println("World 2")
+    }
+    launch {
+        delay(1000L)
+        println("World 1")
+    }
+    println("Hello")
+    println("couroutine scope ended")
+    }
+    println("outside do world")
+}
+
+------------------------------**************************--------------------------------
+
+
