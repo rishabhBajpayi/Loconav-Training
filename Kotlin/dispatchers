@@ -1,0 +1,73 @@
+import kotlinx.coroutines.*
+
+fun main() {
+    runBlocking{
+    println("Beginning runBlocking: ${Thread.currentThread().name}")
+    
+    //confined
+    launch{
+        //first execute on parent thread here main
+        println("launch Confined: ${Thread.currentThread().name}")
+        delay(1000)
+        //after suspend again execute on parent thread 
+        println("launch after delay Confined: ${Thread.currentThread().name}")
+    }
+    
+    //unconfined
+    launch(Dispatchers.Unconfined){
+        //first execute on parent thread here main
+        println("launch Unconfined: ${Thread.currentThread().name}")
+        delay(1000)
+        //after suspend execute on different
+        println("launch after delay Unconfined: ${Thread.currentThread().name}")
+    }
+    
+    launch(Dispatchers.Default){
+        //first execute on default dispatcher
+        println("launch Default: ${Thread.currentThread().name}")
+        delay(1000)
+        //after suspend may or may not execute on same thread 
+        println("launch after delay Default: ${Thread.currentThread().name}")
+    }
+    
+    launch(coroutineContext){
+        //first execute on parent thread here main
+        println("launch CouroutineContext: ${Thread.currentThread().name}")
+        delay(1000)
+        //after suspend execute on same thread 
+        println("launch after delay CouroutineContext: ${Thread.currentThread().name}")
+    }
+    println("Ending runBlocking: ${Thread.currentThread().name}")
+    }
+    main2("Main2")
+}
+
+fun main2(main :String) = runBlocking(Dispatchers.Default){
+    println("$main Beginning runBlocking: ${Thread.currentThread().name}")
+    
+    launch{
+        println("$main launch Confined: ${Thread.currentThread().name}")
+        delay(1000)
+        println("$main launch after delay Confined: ${Thread.currentThread().name}")
+    }
+    
+    launch(Dispatchers.Unconfined){
+        println("$main launch Unconfined: ${Thread.currentThread().name}")
+        delay(2000)
+        println("$main launch after delay Unconfined: ${Thread.currentThread().name}")
+    }
+    
+    launch(coroutineContext){
+        println("$main launch CouroutineContext: ${Thread.currentThread().name}")
+        delay(3000)
+        println("$main launch after delay CouroutineContext: ${Thread.currentThread().name}")
+    }
+    
+    launch(Dispatchers.Default){
+        println("$main launch Default: ${Thread.currentThread().name}")
+        delay(4000)
+        println("$main launch after delay Default: ${Thread.currentThread().name}")
+    }
+
+    println("$main Ending runBlocking: ${Thread.currentThread().name}")
+}
