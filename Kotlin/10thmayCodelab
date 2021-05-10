@@ -1,0 +1,20 @@
+class Dice(val sides : Int){
+    fun rollDice() : Int {
+        return (1..sides).random()
+    }
+}
+
+fun main() {
+    val lucky = 3
+    val d = Dice(6)
+    val res = d.rollDice()
+    when(res){
+        lucky -> println("Congratulations! you got a lucky number: $lucky")
+        else -> println("OOPs! try again, you got ${res}")
+    }
+   
+    if(lucky == res)
+    	println("Congratulations! you got a lucky number: $lucky")
+    else
+    	println("OOPs! try again, you got ${res}")
+}
