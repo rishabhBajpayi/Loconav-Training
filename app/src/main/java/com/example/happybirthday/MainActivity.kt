@@ -1,8 +1,10 @@
 package com.example.happybirthday
 
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.CheckBox
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -11,13 +13,10 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.hb_activity_main)
         Toast.makeText(applicationContext,"Application is Started",Toast.LENGTH_SHORT).show()
-//        val pressButton = findViewById<View>(R.id.press) as Button
-//        pressButton.setOnClickListener {
-//            print("button pressed");
-//        }
-//        checkStateOfCheckBox()
+//        val txt = findViewById<TextView>(R.id.message)
+//        txt.setText(Html.fromHtml("<h2>Title</h2><br><p>Description here</p>"))
     }
 
     fun buttonPressed(v :View){

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Happy Birthday</string>
+    <string name="app_name">Birthday Card</string>
+    <string name="cardTitle">Happy Birthday Raj</string>
+    <string name="cardSender">From Rishabh</string>
+    <string name="cardMessage">\t\t\t\t\t\t\t\t\t\tWish you a very happy birthday dear, may this year bring blessings and a lots of happiness to you. </string>
+    <string name="todo">TODO</string>
 </resources>
