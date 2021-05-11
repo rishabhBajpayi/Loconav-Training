@@ -38,7 +38,11 @@ class MainActivity : AppCompatActivity() {
 
     fun calculateTip(){
         val costInStr = binding.costTxt.text.toString()
-        val cost = costInStr.toDouble()
+        val cost = costInStr.toDoubleOrNull()
+        if (cost == null) {
+            binding.tipResult.text = getString(R.string.tip_amount, "")
+            return
+        }
         val isSelect = binding.radGrp.checkedRadioButtonId
         var tip = when(isSelect){
             R.id.rd20 -> cost*0.2
