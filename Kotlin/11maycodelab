@@ -1,0 +1,80 @@
+import kotlin.math.PI as pi
+import kotlin.math.sqrt
+
+fun main() {
+    val sq = SquareCabin(5,5.0)
+    with(sq) {
+    	println("\nSquare Cabin\n============")
+        println("Floor Area: ${floorArea()}")
+    	println("Capacity: $capacity")
+    	println("Material: $buildingMaterial")
+    	println("Has room? ${hasRoom()}")
+        getRoom()
+    	println("Has room? ${hasRoom()}")
+    }
+    var rh = RoundHut(3,3.0)
+    with(rh) {
+    	println("\nRound Hut\n============")
+        println("Floor Area: ${floorArea()}")
+    	println("Capacity: $capacity")
+    	println("Material: $buildingMaterial")
+    	println("Has room? ${hasRoom()}")
+        getRoom()
+    	println("Has room? ${hasRoom()}")
+    }
+    var rt = RoundTower(13,4,31.0)
+    with(rt) {
+    	println("\nRound Tower\n============")
+        println("Floor Area: ${floorArea()}")
+    	println("Capacity: $capacity")
+    	println("Material: $buildingMaterial")
+    	println("Has room? ${hasRoom()}")
+        getRoom()
+    	println("Has room? ${hasRoom()}")
+    }
+}
+    
+abstract class Dwelling(private var residents :Int){
+    abstract val buildingMaterial : String
+    abstract val capacity: Int
+    abstract fun floorArea(): Double
+    fun hasRoom(): Boolean {
+    	return residents < capacity
+	}
+    fun getRoom() {
+        if (capacity > residents) {
+            residents++
+            println("You got a room!")
+        } else {
+            println("Sorry, at capacity and no rooms left.")
+        }
+	}
+}
+
+class SquareCabin(residents: Int,val len: Double) : Dwelling(residents){
+    override val buildingMaterial = "Wood"
+    override val capacity = 6
+    override fun floorArea(): Double {
+		return (len*len)
+	}
+}
+
+open class RoundHut(residents: Int,val rad: Double) : Dwelling(residents) {
+    override val buildingMaterial = "Straw"
+    override val capacity = 4
+    override fun floorArea(): Double {
+		return (pi*rad*rad)
+	}
+    fun calculateMaxCarpetSize(): Double {
+        val diameter = 2 * rad
+        return sqrt(diameter * diameter / 2)
+	}
+}
+
+class RoundTower(residents: Int,val floors: Int=1,tRad: Double) : RoundHut(residents,tRad) {
+    override val buildingMaterial = "Stone"
+    override val capacity = 4*floors
+    override fun floorArea(): Double {
+    	return super.floorArea() * floors
+	}
+}
