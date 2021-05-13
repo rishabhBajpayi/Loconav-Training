@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 //        setContentView(R.layout.dice_activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Toast.makeText(applicationContext, "Application is Started", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Application is Started", Toast.LENGTH_SHORT).show()
         binding.clcTip.setOnClickListener {
             calculateTip()
         }
