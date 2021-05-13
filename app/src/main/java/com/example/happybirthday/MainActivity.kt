@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         Log.i("Main Activity","Main Activity onCreate")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val actionBar = supportActionBar
         actionBar!!.title = "Multi App Screen"
         Toast.makeText(this, "Main Activity Started", Toast.LENGTH_SHORT).show()
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         binding.TipAppBtn.setOnClickListener {
             val intent = Intent(this, TipAppActivity::class.java)
             startActivity(intent)
-        }
 //        val txt = findViewById<TextView>(R.id.message)
 //        txt.setText(Html.fromHtml("<h2>Title</h2><br><p>Description here</p>"))
     }
@@ -81,5 +81,4 @@ class MainActivity : AppCompatActivity() {
         }
         return false
     }
-
 }
