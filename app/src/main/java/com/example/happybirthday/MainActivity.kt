@@ -1,104 +1,85 @@
 package com.example.happybirthday
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.text.Html
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.happybirthday.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
-import java.text.NumberFormat
-
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.view_activity_main)
-//        setContentView(R.layout.hb_activity_main)
-//        setContentView(R.layout.dice_activity_main)
+        Log.i("Main Activity","Main Activity onCreate")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Toast.makeText(applicationContext, "Application is Started", Toast.LENGTH_SHORT).show()
-        binding.clcTip.setOnClickListener {
-            calculateTip()
+        val actionBar = supportActionBar
+        actionBar!!.title = "Multi App Screen"
+        Toast.makeText(this, "Main Activity Started", Toast.LENGTH_SHORT).show()
+        binding.HbAppBtn.setOnClickListener {
+            val intent = Intent(this, HbAppActivity::class.java)
+            startActivity(intent)
         }
-
-//    --------button used in dice UI--------
-//        val btn: Button = findViewById(R.id.rollBtn)
-//        btn.setOnClickListener {
-//            Toast.makeText(this, "Dice Rolled!", Toast.LENGTH_SHORT).show()
-//            roll()
-//        }
-
-
+        binding.DiceAppBtn.setOnClickListener {
+            val intent = Intent(this, DiceAppActivity::class.java)
+            startActivity(intent)
+        }
+        binding.ViewAppBtn.setOnClickListener {
+            val intent = Intent(this, ViewAppActivity::class.java)
+            startActivity(intent)
+        }
+        binding.TipAppBtn.setOnClickListener {
+            val intent = Intent(this, TipAppActivity::class.java)
+            startActivity(intent)
+        }
 //        val txt = findViewById<TextView>(R.id.message)
 //        txt.setText(Html.fromHtml("<h2>Title</h2><br><p>Description here</p>"))
     }
 
-    fun calculateTip(){
-        val costInStr = binding.costTxt.text.toString()
-        val cost = costInStr.toDoubleOrNull()
-        if (cost == null) {
-            binding.tipResult.text = getString(R.string.tip_amount, "")
-            return
-        }
-        val isSelect = binding.radGrp.checkedRadioButtonId
-        var tip = when(isSelect){
-            R.id.rd20 -> cost*0.2
-            R.id.rd18 -> cost*0.18
-            else -> cost*0.15
-        }
-        if(binding.swch.isChecked)
-            tip = kotlin.math.ceil(tip)
-
-        val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
-        binding.tipResult.text = getString(R.string.tip_amount, formattedTip)
+    override fun onStart() {
+        super.onStart()
+        Log.i("Main Activity","onStart")
     }
 
-//    -------------function used in Dice UI---------
-//    private fun roll() {
-//        val d = Dice(6).rollDice()
-//        val draw = when (d) {
-//            1 -> R.drawable.dice_1
-//            2 -> R.drawable.dice_2
-//            3 -> R.drawable.dice_3
-//            4 -> R.drawable.dice_4
-//            5 -> R.drawable.dice_5
-//            else -> R.drawable.dice_6
-//        }
-//        val img: ImageView = findViewById(R.id.rollResult)
-//        img.setImageResource(draw)
-//        img.contentDescription = d.toString()
-//    }
+    override fun onResume() {
+        super.onResume()
+        Log.i("Main Activity","onResume")
+    }
 
+    override fun onPause() {
+        super.onPause()
+        Log.i("Main Activity","onPause")
+    }
 
-//    ---------------buttons used in Views UI------------------
-//    fun buttonPressed(v :View){
-//        println("button pressed from UI call")
-//        val btn = Toast.makeText(applicationContext,"Button Pressed",Toast.LENGTH_SHORT)
-//        btn.show();
-//        Snackbar.make(v,"Basic SnackBar",4000).setAction("Yes",View.OnClickListener {
-//            Toast.makeText(this,"Dismiss SnackBar",Toast.LENGTH_SHORT).show()
-//        }).show()
-//    }
-//    fun imagePressed(v :View){
-//        println("image pressed from UI call")
-//        val img = Toast.makeText(this,"Image Pressed",Toast.LENGTH_SHORT)
-//        img.show()
-//    }
+    override fun onStop() {
+        super.onStop()
+        Log.i("Main Activity","onStop")
+    }
 
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("Main Activity","onRestart")
+    }
 
-//    fun checkStateOfCheckBox (){
-//        val checkBox = findViewById<View>(android.R.id.checkbox) as CheckBox
-//        val checkBoxState = checkBox.isChecked
-//        print(checkBoxState)
-//    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("Main Activity","onDestroy")
+    }
+
+    private fun handleKeyEvent(view: View, keyCode: Int): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            // Hide the keyboard
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+            return true
+        }
+        return false
+    }
+
 }
-
-// ---------class for dice Functioning-----
-//class Dice(val sides: Int) {
-//    fun rollDice(): Int {
-//        return (1..sides).random()
-//    }
-//}
