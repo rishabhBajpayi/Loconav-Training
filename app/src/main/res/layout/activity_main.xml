@@ -1,201 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/beach"
-        android:scaleType="center"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:isScrollContainer="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="Welcome"
-            android:background="@color/teal_700"
-            android:textAllCaps="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="to"
-            android:background="#E65100"
-            android:textAllCaps="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:background="#25f"
-            android:text="Studytonight"
-            android:textAllCaps="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="android"
-            android:background="#76FF03"
-            android:textAllCaps="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="is"
-            android:background="#FDD835"
-            android:textAllCaps="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="fun"
-            android:background="#E040FB"
-            android:textAllCaps="true"/>
-        </LinearLayout>
-        <LinearLayout
+    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditText
+        android:id="@+id/costTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:hint="@string/cost_of_service"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="3"
-                android:imeOptions="actionGo" />
+    <TextView
+        android:id="@+id/serviceQue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/queTxt"
+        app:layout_constraintTop_toBottomOf="@+id/costTxt" />
+    <RadioGroup
+        android:id="@+id/radGrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serviceQue">
 
-            <Button
-                android:id="@+id/press"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="press and show SnackBar"
-                android:onClick="buttonPressed"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/teal_700"
-                android:text="Normal Buttons"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/teal_700"
-                android:text="With Group"/>
-        </LinearLayout>
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/rd20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <LinearLayout
+            android:text="@string/amazing_20"/>
+        <RadioButton
+            android:id="@+id/rd18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton1" />
-
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton2" />
-
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton3" />
-        </LinearLayout>
-
-        <RadioGroup
+            android:text="@string/good_18"/>
+        <RadioButton
+            android:id="@+id/rd15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:text="@string/ok_15"
+            android:checked="true"/>
 
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton1" />
+    </RadioGroup>
 
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton2" />
+    <Switch
+        android:id="@+id/swch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/round_up_txt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radGrp"/>
 
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton3" />
-        </RadioGroup>
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <Button
+        android:id="@+id/clcTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swch"/>
 
-            <CheckBox
-                android:id="@+id/checkbox1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="checkbox1" />
+    <TextView
+        android:id="@+id/tip_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip_amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clcTip" />
 
-            <CheckBox
-                android:id="@+id/checkbox2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="checkbox2"
-                android:layout_below="@id/checkbox1"/>
-
-            <CheckBox
-                android:id="@+id/checkbox3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="checkbox3"
-                android:layout_below="@+id/checkbox2"/>
-
-            <CheckBox
-                android:id="@+id/checkbox4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="checkbox4"
-                android:layout_below="@+id/checkbox3"/>
-
-            <ImageButton
-                android:layout_width="209dp"
-                android:layout_height="228dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:onClick="imagePressed"
-                android:scaleType="centerCrop"
-                android:src="@drawable/beach" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
