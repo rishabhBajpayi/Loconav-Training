@@ -1,0 +1,57 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="dogModel"
+            type="com.example.happybirthday.DogModel" />
+    </data>
+
+    <ScrollView xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:ignore="RtlHardcoded">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dog_detail_name_margin_top"
+                android:layout_marginBottom="0dp"
+                android:text="@{dogModel.name}" />
+
+            <ImageView
+                android:id="@+id/dog_image"
+                imageResource="@{dogModel.imageResId}"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dog_detail_image_size"
+                android:layout_marginTop="@dimen/dog_detail_image_margin_vertical"
+                android:layout_marginBottom="@dimen/dog_detail_image_margin_vertical"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dog_detail_description_margin_left"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="@dimen/dog_detail_description_margin_right"
+                android:layout_marginBottom="@dimen/dog_detail_description_margin_bottom"
+                android:autoLink="web"
+                android:text="@{dogModel.text}" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

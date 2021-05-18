@@ -1,8 +1,8 @@
 package com.example.happybirthday
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -14,6 +14,13 @@ class HbAppActivity: AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "Birthday Greeting"
         actionBar.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == android.R.id.home) {
+            onBackPressed()
+            true
+        } else super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {

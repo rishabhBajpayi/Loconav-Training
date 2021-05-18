@@ -47,6 +47,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ViewAppBtn"
+        app:layout_constraintBottom_toTopOf="@id/FrgmntAppBtn"/>
+
+    <Button
+        android:id="@+id/FrgmntAppBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Fragment App"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TipAppBtn"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
