@@ -1,74 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <EditText
-        android:id="@+id/costTxt"
-        android:layout_width="match_parent"
+    android:layout_width="match_parent">
+    <Button
+        android:id="@+id/HbAppBtn"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:hint="@string/cost_of_service"
-        android:inputType="numberDecimal"
+        android:text="HB App"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/serviceQue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/queTxt"
-        app:layout_constraintTop_toBottomOf="@+id/costTxt" />
-    <RadioGroup
-        android:id="@+id/radGrp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/serviceQue">
-
-        <RadioButton
-            android:id="@+id/rd20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/amazing_20"/>
-        <RadioButton
-            android:id="@+id/rd18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/good_18"/>
-        <RadioButton
-            android:id="@+id/rd15"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ok_15"
-            android:checked="true"/>
-
-    </RadioGroup>
-
-    <Switch
-        android:id="@+id/swch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/round_up_txt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radGrp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/DiceAppBtn"/>
 
     <Button
-        android:id="@+id/clcTip"
-        android:layout_width="match_parent"
+        android:id="@+id/DiceAppBtn"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/calculate"
-        android:textAlignment="center"
+        android:text="Dice App"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swch"/>
-
-    <TextView
-        android:id="@+id/tip_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tip_amount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clcTip" />
+        app:layout_constraintTop_toBottomOf="@+id/HbAppBtn"
+        app:layout_constraintBottom_toTopOf="@+id/ViewAppBtn"/>
+
+    <Button
+        android:id="@+id/ViewAppBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="View App"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DiceAppBtn"
+        app:layout_constraintBottom_toTopOf="@+id/TipAppBtn"/>
+
+    <Button
+        android:id="@+id/TipAppBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Tip App"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ViewAppBtn"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
