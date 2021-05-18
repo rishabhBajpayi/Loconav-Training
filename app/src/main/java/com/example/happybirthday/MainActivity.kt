@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         Log.i("Main Activity","Main Activity onCreate")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val actionBar = supportActionBar
         actionBar!!.title = "Multi App Screen"
         Toast.makeText(this, "Main Activity Started", Toast.LENGTH_SHORT).show()
@@ -86,5 +87,4 @@ class MainActivity : AppCompatActivity() {
         }
         return false
     }
-
 }
