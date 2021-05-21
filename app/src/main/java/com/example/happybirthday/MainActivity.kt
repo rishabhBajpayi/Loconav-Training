@@ -42,6 +42,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, FrgmntAppActivity::class.java)
             startActivity(intent)
         }
+        binding.RetroAppBtn.setOnClickListener {
+            val intent = Intent(this, RetroFitAppActivity::class.java)
+            startActivity(intent)
+        }
+        binding.MapAppBtn.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
 //        val txt = findViewById<TextView>(R.id.message)
 //        txt.setText(Html.fromHtml("<h2>Title</h2><br><p>Description here</p>"))
     }
