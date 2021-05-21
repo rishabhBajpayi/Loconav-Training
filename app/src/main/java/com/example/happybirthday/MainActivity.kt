@@ -13,6 +13,7 @@ import com.example.happybirthday.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("Main Activity","Main Activity onCreate")
@@ -37,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         binding.TipAppBtn.setOnClickListener {
             val intent = Intent(this, TipAppActivity::class.java)
             startActivity(intent)
+        }
+        binding.FrgmntAppBtn.setOnClickListener {
+            val intent = Intent(this, FrgmntAppActivity::class.java)
+            startActivity(intent)
+        }
 //        val txt = findViewById<TextView>(R.id.message)
 //        txt.setText(Html.fromHtml("<h2>Title</h2><br><p>Description here</p>"))
     }
