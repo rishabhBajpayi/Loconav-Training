@@ -3,6 +3,7 @@ package com.example.happybirthday
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -24,7 +25,6 @@ class DiceAppActivity: AppCompatActivity() {
             roll()
         }
     }
-
 
     override fun onStart() {
         super.onStart()
