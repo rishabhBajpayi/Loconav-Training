@@ -33,11 +33,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback , WebSocketClass.We
 
         newLatLng = intent.getDoubleArrayExtra("lastLoc")!!
         display = intent.getStringExtra("display")!!
-        println(intent.getBundleExtra("speed"))
 
         webSocketClass = WebSocketClass(this)
         webSocketClass.initiateSocketConnection()
-
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
