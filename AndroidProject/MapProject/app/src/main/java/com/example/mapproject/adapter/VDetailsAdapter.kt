@@ -16,19 +16,17 @@ class VDetailsAdapter(private val data: List<VDetails>) :
     lateinit var bind: VDetailsComponentBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var ctx = parent.context
+        val ctx = parent.context
         val inf = LayoutInflater.from(ctx)
         bind = VDetailsComponentBinding.inflate(inf,parent,false)
         return ViewHolder(bind)
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setData(position)
     }
 
     override fun getItemCount(): Int = data.size
-
 
     inner class ViewHolder(val binding : VDetailsComponentBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -57,8 +55,7 @@ class VDetailsAdapter(private val data: List<VDetails>) :
                 intent.putExtra("display",data[position].display_number)
                 ContextCompat.startActivity(binding.constView.context, intent, null)
             } else{
-                Toast.makeText(binding.constView.context, "No Data Available", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(binding.constView.context, "No Data Available", Toast.LENGTH_SHORT).show()
             }
         }
     }
