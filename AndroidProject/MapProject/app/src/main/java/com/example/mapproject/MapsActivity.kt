@@ -16,13 +16,14 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.util.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback , WebSocketClass.WebSocketListenerInterface{
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
+    WebSocketClass.WebSocketListenerInterface {
 
     private lateinit var map: GoogleMap
     lateinit var newLatLng: DoubleArray
     lateinit var display: String
     lateinit var webSocketClass: WebSocketClass
-    lateinit var curLocMar : Marker
+    lateinit var curLocMar: Marker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,30 +51,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback , WebSocketClass.We
     override fun onNewValuesReceived(value: Payload) {
         println("value received from websocket in map activity")
         println(value)
-        updateMarkerLocation(LatLng(value.latitude,value.longitude),value.speed.toString())
+        updateMarkerLocation(LatLng(value.latitude, value.longitude), value.speed.toString())
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-//        val vehLatLng = LatLng(newLatLng[0], newLatLng[1])
-//        val zoomLevel = 18f
-//        curLocMar = map.addMarker(
-//            MarkerOptions().position(vehLatLng).title(display).snippet("Speed : ${newLatLng[2]}")
-//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-//        )
-//        curLocMar?.showInfoWindow()
-//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(vehLatLng, zoomLevel))
+        val vehLatLng = LatLng(newLatLng[0], newLatLng[1])
+        val zoomLevel = 18f
+        curLocMar = map.addMarker(MarkerOptions().position(vehLatLng).title(display)
+            .snippet("Speed : ${newLatLng[2]}")
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+        curLocMar?.showInfoWindow()
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(vehLatLng, zoomLevel))
         onMapLongPress(map)
         onPoiClicked(map)
     }
 
-    fun updateMarkerLocation(latLng: LatLng,string: String){
-        curLocMar = map.addMarker(
-            MarkerOptions().position(latLng).title(display).snippet("Speed : $string")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-        )
+    fun updateMarkerLocation(latLng: LatLng, string: String) {
+        curLocMar.position = latLng
+        curLocMar.snippet = "Speed : $string"
         curLocMar?.showInfoWindow()
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        map.moveCamera(CameraUpdateFactory.newLatLng(latLng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
