@@ -26,8 +26,9 @@ class MainActivity : AppCompatActivity() {
             }
             override fun onResponse(call: Call<Vehicles>, response: Response<Vehicles>) {
                 if (response.isSuccessful) {
+                    println(response.body())
                     val viewId = findViewById<RecyclerView>(R.id.vehicles_recycler_view)
-                    val adapter = VDetailsAdapter(response.body()?.data!!)
+                    val adapter = response.body()?.let { VDetailsAdapter(it.data) }
                     viewId.adapter = adapter
                     viewId.layoutManager = LinearLayoutManager(baseContext)
                 }else{
