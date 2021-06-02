@@ -17,23 +17,26 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
-    WebSocketClass.WebSocketListenerInterface {
+
+    WebSocketClass.GetDataListener {
 
     private lateinit var map: GoogleMap
-    lateinit var newLatLng: DoubleArray
-    lateinit var display: String
-    lateinit var webSocketClass: WebSocketClass
-    lateinit var curLocMar: Marker
+    private var newLatLng: DoubleArray ? = null
+    private lateinit var display: String
+    private lateinit var webSocketClass: WebSocketClass
+    private var curLocMar: Marker? = null
+    private var speed : Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         val actionBar = supportActionBar
-        actionBar!!.title = "Vehicle Last Location"
-        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar?.title = "Vehicle Last Location"
+        actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        newLatLng = intent.getDoubleArrayExtra("lastLoc")!!
-        display = intent.getStringExtra("display")!!
+        newLatLng = intent.getDoubleArrayExtra("lastLoc")
+        display = intent.getStringExtra("display").toString()
+        speed = intent.getDoubleExtra("speed",0.0)
 
         webSocketClass = WebSocketClass(this)
         webSocketClass.initiateSocketConnection()
@@ -51,26 +54,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     override fun onNewValuesReceived(value: Payload) {
         println("value received from websocket in map activity")
         println(value)
-        updateMarkerLocation(LatLng(value.latitude, value.longitude), value.speed.toString())
+        updateMarkerLocation(LatLng(value.latitude, value.longitude), value.speed.toString() , value.orientation)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        val vehLatLng = LatLng(newLatLng[0], newLatLng[1])
+        val vehLatLng = LatLng(newLatLng?.get(0) ?: 0.0 , newLatLng?.get(1)?: 0.0)
         val zoomLevel = 18f
         curLocMar = map.addMarker(MarkerOptions().position(vehLatLng).title(display)
-            .snippet("Speed : ${newLatLng[2]}")
-            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+            .snippet("Speed : $speed")
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.truck_as_icon)))
         curLocMar?.showInfoWindow()
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(vehLatLng, zoomLevel))
         onMapLongPress(map)
         onPoiClicked(map)
     }
 
-    fun updateMarkerLocation(latLng: LatLng, string: String) {
-        curLocMar.position = latLng
-        curLocMar.snippet = "Speed : $string"
-        curLocMar?.showInfoWindow()
+    private fun updateMarkerLocation(latLng: LatLng, string: String, rot : Long ) {
+        curLocMar?.let {
+            it.position = latLng
+            it.snippet = "Speed : $string"
+            it.rotation = rot.toFloat()
+            it.showInfoWindow()
+        }
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng))
     }
 
