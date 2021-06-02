@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
+
     WebSocketClass.GetDataListener {
 
     private lateinit var map: GoogleMap
@@ -63,7 +64,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         curLocMar = map.addMarker(MarkerOptions().position(vehLatLng).title(display)
             .snippet("Speed : $speed")
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.truck_as_icon)))
-
         curLocMar?.showInfoWindow()
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(vehLatLng, zoomLevel))
         onMapLongPress(map)
