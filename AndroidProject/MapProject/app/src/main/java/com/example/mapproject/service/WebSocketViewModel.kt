@@ -1,6 +1,8 @@
 package com.example.mapproject.service
 
-import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.mapproject.model.Message
 import com.example.mapproject.model.Payload
 import com.squareup.moshi.JsonAdapter
@@ -13,11 +15,15 @@ import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
 
-class WebSocketClass(private val ctx: Context) {
+class WebSocketViewModel : ViewModel()  {
+
+
+    private var _payload = MutableLiveData<Payload>()
+    val payload : LiveData<Payload>
+        get() = _payload
 
     private lateinit var webSocket: WebSocket
-    lateinit var getDataInterfaceListener: GetDataListener
-    private val SERVERPATH: String =
+    private val serverPath: String =
         "wss://stgtessaractws.loconav.com/cable?token=Re_RxxzPi-5ZK_HmuUhG"
 
     var obj = object : WebSocketListener(){
@@ -56,7 +62,7 @@ class WebSocketClass(private val ctx: Context) {
             val jsonAdapter2: JsonAdapter<Message> = moshi2.adapter(Message::class.java)
             val data2 = jsonAdapter2.fromJson(text)
             println(data2?.payload)
-            data2?.payload?.let { getDataInterfaceListener.onNewValuesReceived(it) }
+            _payload.value = data2?.payload
         }
 
         private val sendMessage: String
@@ -76,22 +82,10 @@ class WebSocketClass(private val ctx: Context) {
             }
     }
 
-    interface GetDataListener {
-        fun onNewValuesReceived(value: Payload)
-    }
-
     fun initiateSocketConnection() {
-        initializeListener()
         val client = OkHttpClient()
-        val request = Request.Builder().url(SERVERPATH).build()
+        val request = Request.Builder().url(serverPath).build()
         webSocket = client.newWebSocket(request,obj)
-    }
-
-    private fun initializeListener() {
-        if (ctx is GetDataListener)
-            getDataInterfaceListener = ctx
-        else
-            throw RuntimeException(ctx.toString() + "must implement BelowFragmentLListener ")
     }
 
     fun closeWebSocket() {

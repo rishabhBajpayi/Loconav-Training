@@ -3,9 +3,9 @@ package com.example.mapproject
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mapproject.model.Payload
-import com.example.mapproject.service.WebSocketClass
+import com.example.mapproject.service.WebSocketViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,15 +16,15 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.util.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
-    WebSocketClass.GetDataListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private var newLatLng: DoubleArray ? = null
     private lateinit var display: String
-    private lateinit var webSocketClass: WebSocketClass
     private var curLocMar: Marker? = null
     private var speed : Double = 0.0
+    private val viewModel: WebSocketViewModel by viewModels()
+    lateinit var mapFragment: SupportMapFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,28 +32,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val actionBar = supportActionBar
         actionBar?.title = "Vehicle Last Location"
         actionBar?.setDisplayHomeAsUpEnabled(true)
-
         newLatLng = intent.getDoubleArrayExtra("lastLoc")
         display = intent.getStringExtra("display").toString()
         speed = intent.getDoubleExtra("speed",0.0)
 
-        webSocketClass = WebSocketClass(this)
-        webSocketClass.initiateSocketConnection()
+        viewModel.initiateSocketConnection()
 
-        val mapFragment = supportFragmentManager
+        mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        webSocketClass.closeWebSocket()
-    }
-
-    override fun onNewValuesReceived(value: Payload) {
-        println("value received from websocket in map activity")
-        println(value)
-        updateMarkerLocation(LatLng(value.latitude, value.longitude), value.speed.toString() , value.orientation)
+        viewModel.closeWebSocket()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -62,22 +54,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val zoomLevel = 18f
         curLocMar = map.addMarker(MarkerOptions().position(vehLatLng).title(display)
             .snippet("Speed : $speed")
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.truck_as_icon)))
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.truck_as_icon)).flat(true))
 
         curLocMar?.showInfoWindow()
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(vehLatLng, zoomLevel))
         onMapLongPress(map)
         onPoiClicked(map)
+        updateMarkerLocation()
     }
 
-    private fun updateMarkerLocation(latLng: LatLng, string: String, rot : Long ) {
-        curLocMar?.let {
-            it.position = latLng
-            it.snippet = "Speed : $string"
-            it.rotation = rot.toFloat()
-            it.showInfoWindow()
-        }
-        map.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+    private fun updateMarkerLocation() {
+        viewModel.payload.observe(mapFragment.viewLifecycleOwner,{payLoad->
+            curLocMar?.let {
+                it.position = LatLng(payLoad.latitude,payLoad.longitude)
+                it.snippet = "Speed : ${payLoad.speed}"
+                it.rotation = payLoad.orientation.toFloat()
+                map.moveCamera(CameraUpdateFactory.newLatLng(it.position))
+                it.showInfoWindow()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
