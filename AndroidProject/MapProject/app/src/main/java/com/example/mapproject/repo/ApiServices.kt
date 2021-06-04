@@ -12,20 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiServices{
 
-
-    object ApiServiceGenerator {
-        private val client = OkHttpClient.Builder().build()
-        private val retrofit = Retrofit.Builder()
-            .baseUrl("https://run.mocky.io")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-
-        fun <T> buildService(service: Class<T>): T{
-            return retrofit.create(service)
-        }
-    }
-
     fun apiRequest() : List<VDetails> {
         var data : MutableList<VDetails> = mutableListOf()
         val serviceGen = ApiServiceGenerator.buildService(VehicleDataApi::class.java)
@@ -46,5 +32,18 @@ object ApiServices{
         })
 
         return data
+    }
+}
+
+object ApiServiceGenerator {
+    private val client = OkHttpClient.Builder().build()
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("https://run.mocky.io")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .build()
+
+    fun <T> buildService(service: Class<T>): T{
+        return retrofit.create(service)
     }
 }
