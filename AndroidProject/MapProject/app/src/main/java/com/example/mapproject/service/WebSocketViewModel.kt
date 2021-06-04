@@ -58,11 +58,11 @@ class WebSocketViewModel : ViewModel()  {
         }
 
         private fun getResult(text: String) {
-            val moshi2 = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-            val jsonAdapter2: JsonAdapter<Message> = moshi2.adapter(Message::class.java)
-            val data2 = jsonAdapter2.fromJson(text)
-            println(data2?.payload)
-            _payload.value = data2?.payload
+            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+            val jsonAdapter: JsonAdapter<Message> = moshi.adapter(Message::class.java)
+            val data = jsonAdapter.fromJson(text)
+            println(data?.payload)
+            _payload.value = data?.payload
         }
 
         private val sendMessage: String
