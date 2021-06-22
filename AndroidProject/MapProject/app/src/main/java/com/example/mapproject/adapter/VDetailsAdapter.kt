@@ -28,6 +28,8 @@ class VDetailsAdapter(private val data: List<VDetails>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(v_details: VDetails) {
+            println("set data ***********************************************************")
+            println(v_details)
             v_details.let {
                 binding.id.text = it.id.toString()
                 binding.displayNumber.text = it.display_number
